@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 class UserController extends Controller
 {
     public function UserCreate(UserRequest $request){
-        $user=User::create($request->validated());
         $user['password'] = Hash::make($request->password);
-            return response()->json($user);
+        $user=User::create($request->validated());
             //generate token
-            $token = $data->createToken('my_Token')->plainTextToken;
-            
+            $token = $user->createToken('my_Token')->plainTextToken;
             $response = [
                 'data' => $user,
                 'token' => $token,
@@ -51,7 +51,7 @@ class UserController extends Controller
     //user can logout through this method
     public function logout(Request $request)
     {
-            $token = request()->user()->currentAccessToken()->token;
+           $token = request()->user()->currentAccessToken()->token;
             $request->user()->tokens()->where('token', $token)->delete();
             // expected response
             return response([

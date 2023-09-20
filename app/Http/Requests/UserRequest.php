@@ -11,7 +11,7 @@ class UserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
         'password' => ['required', Password::min(8)->letters()->mixedCase()->symbols()->numbers()->uncompromised()],
         'first_name'=>['required','string'],
         'last_name'=>['required','string'],
-        'compnay'=>['required','string'],
+        'company'=>['required','string'],
         'job'=>['required','string'],
         'country'=>['required','string'],
         'phone'=>['required','string'],

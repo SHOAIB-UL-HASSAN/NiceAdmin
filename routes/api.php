@@ -14,13 +14,13 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+/*Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
-Route::controller(Userontroller::class)->group(function () {
+Route::controller(UserController::class)->group(function () {
     //admin signup route
-    Route::post('signup', 'Usercreate');
+    Route::post('signup', 'UserCreate');
     //login
     Route::post('login', 'login');
     //logout
